@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function quote(str) {
   return `[${str}]`;
@@ -6,5 +6,11 @@ function quote(str) {
 
 module.exports = { ...require('./mixins/pagination-not-supported'),
   name: 'mssql',
-  quote
+  quote,
+
+  compositeKey(parent, keys) {
+    keys = keys.map(key => `${quote(parent)}.${quote(key)}`);
+    return `CONCAT(${keys.join(', ')})`;
+  }
+
 };
