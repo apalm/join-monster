@@ -189,7 +189,7 @@ async function handleTable(parent, node, prefix, context, selections, tables, wh
         node.args.first = node.limit;
         await dialect.handleBatchedManyToManyPaginated(parent, node, context, tables, batchScope, joinCondition);
       } else {
-        tables.push(`FROM ${node.junction.sqlTable} ${q(node.junction.as)}`, `LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`);
+        tables.push(`FROM ${q(node.junction.sqlTable)} ${q(node.junction.as)}`, `LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`);
         wheres.push(`${q(node.junction.as)}.${q(node.junction.sqlBatch.thisKey.name)} IN (${batchScope.join(',')})`);
       }
     }
@@ -216,7 +216,7 @@ async function handleTable(parent, node, prefix, context, selections, tables, wh
       node.args.first = node.limit;
       await dialect.handleBatchedOneToManyPaginated(parent, node, context, tables, batchScope);
     } else {
-      tables.push(`FROM ${node.name} ${q(node.as)}`);
+      tables.push(`FROM ${q(node.name)} ${q(node.as)}`);
       wheres.push(`${q(node.as)}.${q(node.sqlBatch.thisKey.name)} IN (${batchScope.join(',')})`);
     }
   } else if (node.paginate) {
@@ -226,7 +226,7 @@ async function handleTable(parent, node, prefix, context, selections, tables, wh
     await dialect.handlePaginationAtRoot(parent, node, context, tables);
   } else {
     (0, _assert.default)(!parent, `Object type for "${node.fieldName}" table must have a "sqlJoin" or "sqlBatch"`);
-    tables.push(`FROM ${node.name} ${q(node.as)}`);
+    tables.push(`FROM ${q(node.name)} ${q(node.as)}`);
   }
 }
 

@@ -326,7 +326,7 @@ async function handleTable(
         )
       } else {
         tables.push(
-          `FROM ${node.junction.sqlTable} ${q(node.junction.as)}`,
+          `FROM ${q(node.junction.sqlTable)} ${q(node.junction.as)}`,
           `LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`
         )
         // ensures only the correct records are fetched using the value of the parent key
@@ -410,7 +410,7 @@ async function handleTable(
       )
       // otherwite, just a regular left join on the table
     } else {
-      tables.push(`FROM ${node.name} ${q(node.as)}`)
+      tables.push(`FROM ${q(node.name)} ${q(node.as)}`)
       wheres.push(
         `${q(node.as)}.${q(node.sqlBatch.thisKey.name)} IN (${batchScope.join(
           ','
@@ -428,7 +428,7 @@ async function handleTable(
       !parent,
       `Object type for "${node.fieldName}" table must have a "sqlJoin" or "sqlBatch"`
     )
-    tables.push(`FROM ${node.name} ${q(node.as)}`)
+    tables.push(`FROM ${q(node.name)} ${q(node.as)}`)
   }
 }
 
