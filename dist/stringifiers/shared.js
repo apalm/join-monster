@@ -110,7 +110,7 @@ function keysetPagingSelect(table, whereCondition, order, limit, as, options = {
 ${joinType || ''} JOIN LATERAL (
   SELECT ${q(as)}.*
   FROM ${q(table)} ${q(as)}
-  ${extraJoin ? `LEFT JOIN ${extraJoin.name} ${q(extraJoin.as)}
+  ${extraJoin ? `LEFT JOIN ${q(extraJoin.name)} ${q(extraJoin.as)}
     ON ${extraJoin.condition}` : ''}
   WHERE ${whereCondition}
   ORDER BY ${orderingsToString(order.columns, q, order.table)}
@@ -143,7 +143,7 @@ function offsetPagingSelect(table, pagingWhereConditions, order, limit, offset, 
 ${joinType || ''} JOIN LATERAL (
   SELECT ${q(as)}.*, count(*) OVER () AS ${q('$total')}
   FROM ${q(table)} ${q(as)}
-  ${extraJoin ? `LEFT JOIN ${extraJoin.name} ${q(extraJoin.as)}
+  ${extraJoin ? `LEFT JOIN ${q(extraJoin.name)} ${q(extraJoin.as)}
     ON ${extraJoin.condition}` : ''}
   WHERE ${whereCondition}
   ORDER BY ${orderingsToString(order.columns, q, order.table)}

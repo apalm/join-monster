@@ -175,7 +175,7 @@ async function handleTable(parent, node, prefix, context, selections, tables, wh
       node.args.first = node.limit;
       await dialect.handleJoinedOneToManyPaginated(parent, node, context, tables, joinCondition);
     } else {
-      tables.push(`LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`);
+      tables.push(`LEFT JOIN ${q(node.name)} ${q(node.as)} ON ${joinCondition}`);
     }
   } else if ((_ref2 = node) != null ? (_ref2 = _ref2.junction) != null ? _ref2.sqlBatch : _ref2 : _ref2) {
     if (parent) {
@@ -189,7 +189,7 @@ async function handleTable(parent, node, prefix, context, selections, tables, wh
         node.args.first = node.limit;
         await dialect.handleBatchedManyToManyPaginated(parent, node, context, tables, batchScope, joinCondition);
       } else {
-        tables.push(`FROM ${q(node.junction.sqlTable)} ${q(node.junction.as)}`, `LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`);
+        tables.push(`FROM ${q(node.junction.sqlTable)} ${q(node.junction.as)}`, `LEFT JOIN ${q(node.name)} ${q(node.as)} ON ${joinCondition}`);
         wheres.push(`${q(node.junction.as)}.${q(node.junction.sqlBatch.thisKey.name)} IN (${batchScope.join(',')})`);
       }
     }
@@ -203,10 +203,10 @@ async function handleTable(parent, node, prefix, context, selections, tables, wh
       node.args.first = node.limit;
       await dialect.handleJoinedManyToManyPaginated(parent, node, context, tables, joinCondition1, joinCondition2);
     } else {
-      tables.push(`LEFT JOIN ${node.junction.sqlTable} ${q(node.junction.as)} ON ${joinCondition1}`);
+      tables.push(`LEFT JOIN ${q(node.junction.sqlTable)} ${q(node.junction.as)} ON ${joinCondition1}`);
     }
 
-    tables.push(`LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition2}`);
+    tables.push(`LEFT JOIN ${q(node.name)} ${q(node.as)} ON ${joinCondition2}`);
   } else if (node.sqlBatch) {
     if (parent) {
       selections.push(`${q(parent.as)}.${q(node.sqlBatch.parentKey.name)} AS ${q((0, _shared.joinPrefix)(prefix) + node.sqlBatch.parentKey.as)}`);

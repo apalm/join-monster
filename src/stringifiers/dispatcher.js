@@ -286,7 +286,7 @@ async function handleTable(
       )
       // otherwite, just a regular left join on the table
     } else {
-      tables.push(`LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`)
+      tables.push(`LEFT JOIN ${q(node.name)} ${q(node.as)} ON ${joinCondition}`)
     }
 
     // many-to-many using batching
@@ -327,7 +327,7 @@ async function handleTable(
       } else {
         tables.push(
           `FROM ${q(node.junction.sqlTable)} ${q(node.junction.as)}`,
-          `LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition}`
+          `LEFT JOIN ${q(node.name)} ${q(node.as)} ON ${joinCondition}`
         )
         // ensures only the correct records are fetched using the value of the parent key
         wheres.push(
@@ -376,12 +376,12 @@ async function handleTable(
       )
     } else {
       tables.push(
-        `LEFT JOIN ${node.junction.sqlTable} ${q(
+        `LEFT JOIN ${q(node.junction.sqlTable)} ${q(
           node.junction.as
         )} ON ${joinCondition1}`
       )
     }
-    tables.push(`LEFT JOIN ${node.name} ${q(node.as)} ON ${joinCondition2}`)
+    tables.push(`LEFT JOIN ${q(node.name)} ${q(node.as)} ON ${joinCondition2}`)
 
     // one-to-many with batching
   } else if (node.sqlBatch) {

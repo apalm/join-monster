@@ -91,7 +91,7 @@ ${joinType || ''} JOIN LATERAL (
   FROM ${q(table)} ${q(as)}
   ${
     extraJoin
-      ? `LEFT JOIN ${extraJoin.name} ${q(extraJoin.as)}
+      ? `LEFT JOIN ${q(extraJoin.name)} ${q(extraJoin.as)}
     ON ${extraJoin.condition}`
       : ''
   }
@@ -130,7 +130,7 @@ ${joinType || ''} JOIN LATERAL (
   FROM ${q(table)} ${q(as)}
   ${
     extraJoin
-      ? `LEFT JOIN ${extraJoin.name} ${q(extraJoin.as)}
+      ? `LEFT JOIN ${q(extraJoin.name)} ${q(extraJoin.as)}
     ON ${extraJoin.condition}`
       : ''
   }
