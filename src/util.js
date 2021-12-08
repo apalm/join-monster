@@ -1,11 +1,13 @@
 import util from 'util'
 import assert from 'assert'
 import idx from 'idx'
-import { nest } from 'nesthydrationjs'
+import NestHydrationJS from 'nesthydrationjs'
 import stringifySQL from './stringifiers/dispatcher'
 import resolveUnions from './resolve-unions'
 import deprecate from 'deprecate'
 const debug = require('debug')('join-monster')
+
+const nest = NestHydrationJS().nest
 
 import defineObjectShape from './define-object-shape'
 

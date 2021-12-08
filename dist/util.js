@@ -24,7 +24,7 @@ var _util = _interopRequireDefault(require("util"));
 
 var _assert = _interopRequireDefault(require("assert"));
 
-var _nesthydrationjs = require("nesthydrationjs");
+var _nesthydrationjs = _interopRequireDefault(require("nesthydrationjs"));
 
 var _dispatcher = _interopRequireDefault(require("./stringifiers/dispatcher"));
 
@@ -37,6 +37,8 @@ var _defineObjectShape = _interopRequireDefault(require("./define-object-shape")
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const debug = require('debug')('join-monster');
+
+const nest = (0, _nesthydrationjs.default)().nest;
 
 function emphasize(str, colorCode = 33) {
   return `\n\x1b[1;${colorCode}m${str}\x1b[0m\n`;
@@ -179,7 +181,7 @@ function handleUserDbCall(dbCall, sql, sqlAST, shapeDefinition) {
             debug(`${rows.length} rows...`);
           }
 
-          const data = (0, _nesthydrationjs.nest)(rows, shapeDefinition);
+          const data = nest(rows, shapeDefinition);
           (0, _resolveUnions.default)(data, sqlAST);
 
           if (debug.enabled) {
@@ -203,7 +205,7 @@ function handleUserDbCall(dbCall, sql, sqlAST, shapeDefinition) {
         debug(`${rows.length} rows...`);
       }
 
-      const data = (0, _nesthydrationjs.nest)(rows, shapeDefinition);
+      const data = nest(rows, shapeDefinition);
       (0, _resolveUnions.default)(data, sqlAST);
 
       if (debug.enabled) {
