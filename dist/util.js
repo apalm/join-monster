@@ -24,7 +24,7 @@ var _util = _interopRequireDefault(require("util"));
 
 var _assert = _interopRequireDefault(require("assert"));
 
-var _nesthydrationjs = require("@stem/nesthydrationjs");
+var _nesthydrationjs = require("nesthydrationjs");
 
 var _dispatcher = _interopRequireDefault(require("./stringifiers/dispatcher"));
 

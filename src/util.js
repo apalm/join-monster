@@ -1,7 +1,7 @@
 import util from 'util'
 import assert from 'assert'
 import idx from 'idx'
-import { nest } from '@stem/nesthydrationjs'
+import { nest } from 'nesthydrationjs'
 import stringifySQL from './stringifiers/dispatcher'
 import resolveUnions from './resolve-unions'
 import deprecate from 'deprecate'
